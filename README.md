@@ -1,9 +1,10 @@
 # Jumoke-API
 API library for talking with [Jumoke Agents](https://github.com/viastakhov/jumoke-agent)
 
-Jumoke is a framework for testing Desktop applications.
+Jumoke is a framework for testing distributed Desktop applications.
 Jumoke supports following wellknown libraries:
 * AutoIt X
+* SQL JDBC
 * SikuliX
 * WinAPI 
 
@@ -18,6 +19,16 @@ Jumoke supports following wellknown libraries:
     String txt = au.controlGetText("[X:3; W:430]", "", "[CLASS:Button; INSTANCE:1]");    
     assert txt == "some text";
   
+  // JDBC
+  String connectionString = 
+  Connection conn = DriverManager.getConnection(connectionString);
+  Statement sta = conn.createStatement();
+  String sqlStatement = 
+  ResultSet rs = sta.execute(sqlStatement).getResultSet();
+  rs.next();
+  Object value = rs.getObject(1);
+  assert value.toString() == "some value";
+
     // Sikuli X
     Sikuli sx = ag.getSikuli();
     Screen scr = sx.getScreen(0);
