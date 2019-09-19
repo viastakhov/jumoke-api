@@ -20,15 +20,15 @@ Jumoke supports following wellknown libraries:
     assert txt == "some text";
   
   // JDBC
-  String connectionString = 
-  Connection conn = DriverManager.getConnection(connectionString);
-  Statement sta = conn.createStatement();
-  String sqlStatement = 
-  ResultSet rs = sta.execute(sqlStatement).getResultSet();
-  rs.next();
-  Object value = rs.getObject(1);
-  assert value.toString() == "some value";
-
+  Jdbc dbc = agent.getJdbc("jdbc:sqlserver://<remote machine host>;user=sa;pasword=******;");
+  String sqlStatement = " USE [NamosRus]; " + "SELECT MAX(ID) AS ID FROM MFLines";
+  Document xmldoc = dbc.executeQuery(sqlStatement);
+  XPathFactory xpathFactory = XPathFactory.newInstance();
+  XPath xpath = xpathFactory.newXPath();
+  XPathExpression expr =  xpath.compile("/Result/Row/ID/text()");
+  NodeList nl = (NodeList) expr.evaluate(xmldoc, XPathConstants.NODESET);
+  assert 1 == Integer.valueOf(nl.item(0).getNodeValue().trim());
+  
     // Sikuli X
     Sikuli sx = ag.getSikuli();
     Screen scr = sx.getScreen(0);
