@@ -19,15 +19,15 @@ Jumoke supports following wellknown libraries:
     String txt = au.controlGetText("[X:3; W:430]", "", "[CLASS:Button; INSTANCE:1]");    
     assert txt == "some text";
   
-  // JDBC
-  Jdbc dbc = agent.getJdbc("jdbc:sqlserver://<remote machine host>;user=sa;pasword=******;");
-  String sqlStatement = " USE [NamosRus]; " + "SELECT MAX(ID) AS ID FROM MFLines";
-  Document xmldoc = dbc.executeQuery(sqlStatement);
-  XPathFactory xpathFactory = XPathFactory.newInstance();
-  XPath xpath = xpathFactory.newXPath();
-  XPathExpression expr =  xpath.compile("/Result/Row/ID/text()");
-  NodeList nl = (NodeList) expr.evaluate(xmldoc, XPathConstants.NODESET);
-  assert 1 == Integer.valueOf(nl.item(0).getNodeValue().trim());
+    // JDBC
+    Jdbc dbc = agent.getJdbc("jdbc:sqlserver://<remote machine host>;user=sa;pasword=******;");
+    String sqlStatement = " USE [NamosRus]; " + "SELECT MAX(ID) AS ID FROM MFLines";
+    Document xmldoc = dbc.executeQuery(sqlStatement);
+    XPathFactory xpathFactory = XPathFactory.newInstance();
+    XPath xpath = xpathFactory.newXPath();
+    XPathExpression expr =  xpath.compile("/Result/Row/ID/text()");
+    NodeList nl = (NodeList) expr.evaluate(xmldoc, XPathConstants.NODESET);
+    assert 1 == Integer.valueOf(nl.item(0).getNodeValue().trim());
   
     // Sikuli X
     Sikuli sx = ag.getSikuli();
@@ -39,7 +39,7 @@ Jumoke supports following wellknown libraries:
     final UINT Msg = new UINT(0x018B);
     final WPARAM wParam = new WPARAM(0);
     final LPARAM lParam = new LPARAM(0);  
-    WinApi win = ag.getWinApi();
+    WinApi wn = ag.getWinApi();
     int controlID = au.controlGetHandle("Title", "", "ListBox7");
     HWND hWnd = new HWND(Pointer.createConstant(controlID));
     int count = wn.sendMessage(hWnd, Msg, wParam, lParam).intValue();
