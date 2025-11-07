@@ -46,7 +46,5 @@ Jumoke supports following wellknown libraries:
     assert count == 5; 
     ```
 
-## License  
-Copyright © 2019 Vladimir Astakhov [viastakhov@mail.ru]
-
+## License
 Distributed under the Eclipse Public License
